@@ -6,14 +6,14 @@ Feature: QavaJS documentation navigation and Steps dropdown (v2)
   Background:
     Given I open url "https://qavajs.github.io/docs/intro"
 
-  Scenario: Open "What's new in v2" from Intro page
+  Scenario: Navigate to "What's new in v2" from the Intro page
     Then I expect element "link=What's new in v2" to be displayed
     When I click "link=What's new in v2"
-    Then I expect url to contain "/docs/"
-    And I expect page title to contain "What's new in v2"
+    Then I expect page title to contain "What's new in v2"
+    And I expect element "css=h1" to have text "What's new in v2"
 
 
-  Scenario: Open "Steps" dropdown and see packages list
+  Scenario: Open "Steps" dropdown and display the packages list
     Then I expect element "link=Steps" to be displayed
     When I click "link=Steps"
     Then I expect element ".dropdown__menu" to be displayed
@@ -25,39 +25,39 @@ Feature: QavaJS documentation navigation and Steps dropdown (v2)
     Then I expect element "link=<Package>" to be displayed
 
     Examples:
-      | Package      |
-      | Playwright   |
-      | WebdriverIO  |
-      | API          |
-      | Database     |
-      | Filesystem   |
-      | Memory       |
+      | Package     |
+      | Playwright  |
+      | WebdriverIO |
+      | API         |
+      | Database    |
+      | Filesystem  |
+      | Memory      |
 
 
-  Scenario: Fail with a clear error if "What's new in v2" link is missing on Intro page
+  Scenario: Negative - "What's new in v2" link is missing on Intro page
     Then I expect element "link=What's new in v2" to be displayed
 
 
-  Scenario: Fail with a clear error if "What's new in v2" navigation is broken
+  Scenario: Negative - "What's new in v2" navigation is broken
     When I click "link=What's new in v2"
-    Then I expect page title to contain "What's new in v2"
+    Then I expect element "css=h1" to have text "What's new in v2"
 
 
-  Scenario: Fail with a clear error if "Steps" dropdown is missing or does not open
+  Scenario: Negative - "Steps" dropdown is missing or does not open
     Then I expect element "link=Steps" to be displayed
     When I click "link=Steps"
     Then I expect element ".dropdown__menu" to be displayed
 
 
-  Scenario Outline: Fail with a clear error if the Steps dropdown package list is incomplete (missing "<Package>")
+  Scenario Outline: Negative - Steps dropdown package list is incomplete (missing "<Package>")
     When I click "link=Steps"
     Then I expect element "link=<Package>" to be displayed
 
     Examples:
-      | Package      |
-      | Playwright   |
-      | WebdriverIO  |
-      | API          |
-      | Database     |
-      | Filesystem   |
-      | Memory       |
+      | Package     |
+      | Playwright  |
+      | WebdriverIO |
+      | API         |
+      | Database    |
+      | Filesystem  |
+      | Memory      |
